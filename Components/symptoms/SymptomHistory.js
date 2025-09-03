@@ -96,4 +96,84 @@ export default function SymptomHistory({ symptoms, isLoading, getSeverityColor, 
               </AnimatePresence>
             </div>
           )}
- 
+        </CardContent>
+      </Card>
+
+      <Dialog open={!!selectedSymptom} onOpenChange={() => setSelectedSymptom(null)}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Symptom Analysis Details</DialogTitle>
+          </DialogHeader>
+          {selectedSymptom && (
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-semibold text-slate-900 mb-2">Symptoms Description</h3>
+                <p className="text-slate-700">{selectedSymptom.symptoms_description}</p>
+              </div>
+
+              {selectedSymptom.ai_analysis && (
+                <div>
+                  <h3 className="font-semibold text-slate-900 mb-2">AI Analysis</h3>
+                  <p className="text-slate-700 leading-relaxed">{selectedSymptom.ai_analysis}</p>
+                </div>
+              )}
+
+              {selectedSymptom.recommendations && (
+                <div>
+                  <h3 className="font-semibold text-slate-900 mb-2">Recommendations</h3>
+                  <p className="text-slate-700 leading-relaxed">{selectedSymptom.recommendations}</p>
+                </div>
+              )}
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <h3 className="font-semibold text-slate-900 mb-2">Assessment</h3>
+                  <div className="space-y-2">
+                    <Badge className={getSeverityColor(selectedSymptom.severity_level)}>
+                      Severity: {selectedSymptom.severity_level}
+                    </Badge>
+                    <Badge className={getUrgencyColor(selectedSymptom.urgency_classification)}>
+                      Urgency: {selectedSymptom.urgency_classification?.replace(/_/g, ' ')}
+                    </Badge>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-slate-900 mb-2">Timeline</h3>
+                  <p className="text-sm text-slate-600">
+                    Recorded: {format(new Date(selectedSymptom.created_date), "PPP 'at' p")}
+                  </p>
+                  {selectedSymptom.duration && (
+                    <p className="text-sm text-slate-600">
+                      Duration: {selectedSymptom.duration}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {selectedSymptom.affected_body_parts?.length > 0 && (
+                <div>
+                  <h3 className="font-semibold text-slate-900 mb-2">Affected Areas</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedSymptom.affected_body_parts.map(part => (
+                      <Badge key={part} variant="outline" className="bg-blue-50">
+                        {part}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {selectedSymptom.triggers && (
+                <div>
+                  <h3 className="font-semibold text-slate-900 mb-2">Triggers</h3>
+                  <p className="text-slate-700">{selectedSymptom.triggers}</p>
+                </div>
+              )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}

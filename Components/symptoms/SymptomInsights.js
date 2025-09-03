@@ -96,4 +96,47 @@ export default function SymptomInsights({ symptoms }) {
 
       {/* Frequent Body Parts */}
       {frequentBodyParts.length > 0 && (
- 
+        <Card className="bg-white/80 backdrop-blur-sm shadow-lg">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Target className="w-5 h-5 text-purple-600" />
+              Common Areas
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {frequentBodyParts.map(([bodyPart, count]) => (
+                <div key={bodyPart} className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-slate-700 capitalize">
+                    {bodyPart}
+                  </span>
+                  <Badge variant="outline" className="bg-purple-50 text-purple-700">
+                    {count} times
+                  </Badge>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Health Tips */}
+      <Card className="bg-gradient-to-r from-green-50 to-blue-50 border-green-200">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-green-900">
+            <Calendar className="w-5 h-5" />
+            Health Tips
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3 text-sm text-green-800">
+            <p>• Track symptoms consistently to identify patterns</p>
+            <p>• Note triggers and environmental factors</p>
+            <p>• Always consult healthcare providers for serious concerns</p>
+            <p>• Keep a detailed record for medical appointments</p>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

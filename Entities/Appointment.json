@@ -50,4 +50,29 @@
       },
       "description": "Questions to ask during appointment"
     },
- 
+    "appointment_notes": {
+      "type": "string",
+      "description": "Notes from the appointment"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "completed",
+        "cancelled",
+        "no_show"
+      ],
+      "default": "scheduled",
+      "description": "Status of the appointment"
+    },
+    "follow_up_required": {
+      "type": "boolean",
+      "description": "Whether follow-up is needed"
+    }
+  },
+  "required": [
+    "appointment_date",
+    "doctor_name",
+    "reason"
+  ]
+}

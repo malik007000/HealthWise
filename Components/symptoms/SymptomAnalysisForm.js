@@ -96,4 +96,71 @@ export default function SymptomAnalysisForm({ onSubmit, onCancel, isAnalyzing })
               <div>
                 <Label htmlFor="triggers" className="text-base font-semibold mb-2 block">
                   Any triggers you noticed?
- 
+                </Label>
+                <Input
+                  id="triggers"
+                  placeholder="e.g., after eating, during stress, in the morning"
+                  value={formData.triggers}
+                  onChange={(e) => setFormData(prev => ({ ...prev, triggers: e.target.value }))}
+                />
+              </div>
+            </div>
+
+            <div>
+              <Label className="text-base font-semibold mb-2 block">
+                Affected body parts
+              </Label>
+              <div className="flex gap-2 mb-3">
+                <Input
+                  placeholder="e.g., head, stomach, chest"
+                  value={newBodyPart}
+                  onChange={(e) => setNewBodyPart(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addBodyPart())}
+                />
+                <Button type="button" onClick={addBodyPart} variant="outline">
+                  <Plus className="w-4 h-4" />
+                </Button>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {formData.affected_body_parts.map((part, index) => (
+                  <Badge
+                    key={index}
+                    variant="secondary"
+                    className="cursor-pointer hover:bg-red-100"
+                    onClick={() => removeBodyPart(part)}
+                  >
+                    {part}
+                    <X className="w-3 h-3 ml-1" />
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-3 pt-4">
+              <Button type="button" variant="outline" onClick={onCancel}>
+                Cancel
+              </Button>
+              <Button 
+                type="submit" 
+                disabled={isAnalyzing || !formData.symptoms_description.trim()}
+                className="bg-red-600 hover:bg-red-700"
+              >
+                {isAnalyzing ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Analyzing...
+                  </>
+                ) : (
+                  <>
+                    <Brain className="w-4 h-4 mr-2" />
+                    Analyze with AI
+                  </>
+                )}
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+}
