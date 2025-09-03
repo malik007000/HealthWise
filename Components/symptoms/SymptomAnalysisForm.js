@@ -1,0 +1,99 @@
+import React, { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Brain, X, Plus, Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+
+export default function SymptomAnalysisForm({ onSubmit, onCancel, isAnalyzing }) {
+  const [formData, setFormData] = useState({
+    symptoms_description: "",
+    duration: "",
+    affected_body_parts: [],
+    triggers: ""
+  });
+
+  const [newBodyPart, setNewBodyPart] = useState("");
+
+  const addBodyPart = () => {
+    if (newBodyPart.trim() && !formData.affected_body_parts.includes(newBodyPart.trim())) {
+      setFormData(prev => ({
+        ...prev,
+        affected_body_parts: [...prev.affected_body_parts, newBodyPart.trim()]
+      }));
+      setNewBodyPart("");
+    }
+  };
+
+  const removeBodyPart = (bodyPart) => {
+    setFormData(prev => ({
+      ...prev,
+      affected_body_parts: prev.affected_body_parts.filter(part => part !== bodyPart)
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.symptoms_description.trim()) return;
+    onSubmit(formData);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+    >
+      <Card className="bg-white/90 backdrop-blur-sm border-red-200 shadow-xl">
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-red-100 rounded-lg">
+                <Brain className="w-6 h-6 text-red-600" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-slate-900">Describe Your Symptoms</h3>
+                <p className="text-sm text-slate-600 font-normal">AI will analyze and provide insights</p>
+              </div>
+            </div>
+            <Button variant="ghost" size="icon" onClick={onCancel}>
+              <X className="w-5 h-5" />
+            </Button>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <Label htmlFor="symptoms" className="text-base font-semibold mb-2 block">
+                What symptoms are you experiencing?
+              </Label>
+              <Textarea
+                id="symptoms"
+                placeholder="Describe your symptoms in detail... (e.g., 'I have been experiencing a persistent headache with sensitivity to light for the past 2 days')"
+                value={formData.symptoms_description}
+                onChange={(e) => setFormData(prev => ({ ...prev, symptoms_description: e.target.value }))}
+                className="min-h-[100px] text-base"
+                required
+              />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="duration" className="text-base font-semibold mb-2 block">
+                  How long have you had these symptoms?
+                </Label>
+                <Input
+                  id="duration"
+                  placeholder="e.g., 2 days, 1 week, since this morning"
+                  value={formData.duration}
+                  onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="triggers" className="text-base font-semibold mb-2 block">
+                  Any triggers you noticed?
+ 

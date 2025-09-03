@@ -1,0 +1,53 @@
+{
+  "name": "VitalSigns",
+  "type": "object",
+  "properties": {
+    "measurement_date": {
+      "type": "string",
+      "format": "datetime-local",
+      "description": "Date and time of measurement"
+    },
+    "blood_pressure_systolic": {
+      "type": "number",
+      "description": "Systolic blood pressure"
+    },
+    "blood_pressure_diastolic": {
+      "type": "number",
+      "description": "Diastolic blood pressure"
+    },
+    "heart_rate": {
+      "type": "number",
+      "description": "Heart rate in beats per minute"
+    },
+    "body_temperature": {
+      "type": "number",
+      "description": "Body temperature in Celsius"
+    },
+    "weight": {
+      "type": "number",
+      "description": "Weight in kilograms"
+    },
+    "oxygen_saturation": {
+      "type": "number",
+      "description": "Oxygen saturation percentage"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about the measurement"
+    },
+    "measurement_context": {
+      "type": "string",
+      "enum": [
+        "resting",
+        "after_exercise",
+        "stressed",
+        "ill",
+        "routine"
+      ],
+      "description": "Context when measurement was taken"
+    }
+  },
+  "required": [
+    "measurement_date"
+  ]
+}

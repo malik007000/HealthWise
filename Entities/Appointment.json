@@ -1,0 +1,53 @@
+{
+  "name": "Appointment",
+  "type": "object",
+  "properties": {
+    "appointment_date": {
+      "type": "string",
+      "format": "datetime-local",
+      "description": "Date and time of appointment"
+    },
+    "doctor_name": {
+      "type": "string",
+      "description": "Name of the healthcare provider"
+    },
+    "specialty": {
+      "type": "string",
+      "description": "Medical specialty (e.g., Cardiology, General Practice)"
+    },
+    "appointment_type": {
+      "type": "string",
+      "enum": [
+        "checkup",
+        "follow_up",
+        "consultation",
+        "procedure",
+        "emergency",
+        "screening"
+      ],
+      "description": "Type of appointment"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for the appointment"
+    },
+    "location": {
+      "type": "string",
+      "description": "Clinic or hospital address"
+    },
+    "phone_number": {
+      "type": "string",
+      "description": "Contact number for the clinic"
+    },
+    "preparation_notes": {
+      "type": "string",
+      "description": "Things to prepare before appointment"
+    },
+    "questions_to_ask": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Questions to ask during appointment"
+    },
+ 

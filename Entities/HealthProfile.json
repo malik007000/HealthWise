@@ -1,0 +1,63 @@
+{
+  "name": "HealthProfile",
+  "type": "object",
+  "properties": {
+    "age": {
+      "type": "number",
+      "description": "User's age in years"
+    },
+    "height": {
+      "type": "number",
+      "description": "Height in centimeters"
+    },
+    "weight": {
+      "type": "number",
+      "description": "Weight in kilograms"
+    },
+    "blood_type": {
+      "type": "string",
+      "enum": [
+        "A+",
+        "A-",
+        "B+",
+        "B-",
+        "AB+",
+        "AB-",
+        "O+",
+        "O-"
+      ],
+      "description": "Blood type"
+    },
+    "allergies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of known allergies"
+    },
+    "chronic_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Chronic health conditions"
+    },
+    "emergency_contact_name": {
+      "type": "string",
+      "description": "Emergency contact person name"
+    },
+    "emergency_contact_phone": {
+      "type": "string",
+      "description": "Emergency contact phone number"
+    },
+    "emergency_contact_relation": {
+      "type": "string",
+      "description": "Relationship to emergency contact"
+    },
+    "medical_notes": {
+      "type": "string",
+      "description": "Additional medical information"
+    }
+  },
+  "required": []
+}

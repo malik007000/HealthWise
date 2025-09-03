@@ -1,0 +1,66 @@
+{
+  "name": "HealthJournal",
+  "type": "object",
+  "properties": {
+    "entry_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the journal entry"
+    },
+    "mood_rating": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "Mood rating from 1-10"
+    },
+    "energy_level": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "Energy level from 1-10"
+    },
+    "sleep_quality": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "Sleep quality rating from 1-10"
+    },
+    "sleep_hours": {
+      "type": "number",
+      "description": "Hours of sleep"
+    },
+    "stress_level": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "Stress level from 1-10"
+    },
+    "journal_text": {
+      "type": "string",
+      "description": "Free-form journal entry"
+    },
+    "ai_sentiment_analysis": {
+      "type": "string",
+      "description": "AI analysis of the journal entry sentiment"
+    },
+    "wellness_score": {
+      "type": "number",
+      "description": "Overall wellness score calculated from metrics"
+    },
+    "activities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Activities performed today"
+    },
+    "symptoms_today": {
+      "type": "string",
+      "description": "Any symptoms experienced today"
+    }
+  },
+  "required": [
+    "entry_date",
+    "mood_rating"
+  ]
+}

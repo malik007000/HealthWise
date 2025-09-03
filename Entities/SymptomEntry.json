@@ -1,0 +1,61 @@
+{
+  "name": "SymptomEntry",
+  "type": "object",
+  "properties": {
+    "symptoms_description": {
+      "type": "string",
+      "description": "User's description of symptoms"
+    },
+    "severity_level": {
+      "type": "string",
+      "enum": [
+        "mild",
+        "moderate",
+        "severe",
+        "critical"
+      ],
+      "description": "Severity assessment"
+    },
+    "ai_analysis": {
+      "type": "string",
+      "description": "AI-generated analysis of symptoms"
+    },
+    "recommendations": {
+      "type": "string",
+      "description": "AI-generated recommendations"
+    },
+    "urgency_classification": {
+      "type": "string",
+      "enum": [
+        "monitor",
+        "schedule_appointment",
+        "seek_urgent_care",
+        "emergency"
+      ],
+      "description": "Urgency level classification"
+    },
+    "affected_body_parts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Body parts affected by symptoms"
+    },
+    "duration": {
+      "type": "string",
+      "description": "How long symptoms have persisted"
+    },
+    "triggers": {
+      "type": "string",
+      "description": "Potential triggers for symptoms"
+    },
+    "follow_up_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Recommended follow-up date"
+    }
+  },
+  "required": [
+    "symptoms_description"
+  ]
+}
